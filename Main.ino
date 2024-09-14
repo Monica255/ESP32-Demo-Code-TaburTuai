@@ -1,7 +1,9 @@
+// branch biring ere
+
 // Library Firebase ESP32
 #include <WiFi.h>
 #include <FirebaseESP32.h>
-// new branch
+
 // Library Sensor DHT
 #include <DHT.h>
 
@@ -36,14 +38,14 @@ DHT dht(DHTPIN, DHTTYPE);
 #define API_KEY "AIzaSyAU9mj87Pq1ixTQm7lkzMHtaz1Eqm0Iht0"
 #define USER_EMAIL "test@test.com"
 #define USER_PASSWORD "123456"
-#define UID "AKbBCrc0QahQlPSHYj6GRmmDw653"
+#define UID "Za1HWAsqusRwQIIi3hqFeXOYFDs2"
 
 FirebaseData fbdo;
 FirebaseJson json;
 FirebaseAuth auth;
 FirebaseConfig config;
 
-String uid, path, pathPompaK1, pathLampuK1, pathMonitoring;
+String uid, path, pathPompaK1 , pathLampuK1, pathMonitoring;
 
 // init variabel value sensor
 //int bacaSensorPH = 0;   //membaca hasil dari sensor pH
@@ -53,7 +55,7 @@ int valSoil;
 //int valSoil2, valSoil3, valSoil4;
 
 // init variabel status 0/1
-int statePompa1, stateLampu1;
+int statePompa1 , stateLampu1;
 
 // init variable water level
 //long currentMillis = 0;
@@ -98,7 +100,7 @@ void initFirebase() {
   config.api_key = API_KEY;
     auth.user.email = "test@test.com";
     auth.user.password = "123456";
-    uid = "AKbBCrc0QahQlPSHYj6GRmmDw653"; 
+    uid = "Za1HWAsqusRwQIIi3hqFeXOYFDs2"; 
 
   Firebase.reconnectWiFi(true);
   fbdo.setResponseSize(4096);

@@ -3,7 +3,7 @@ void sent_data() {
 
   json.set("temperatur", valTemp);
   json.set("humidity", valHum);
-  json.set("kelembaban_tanah_1", valSoil);
+  json.set("kelembaban_tanah", valSoil);
   //json.set("water_level", valCm);
   //json.set("water_flow",flowRate);
 

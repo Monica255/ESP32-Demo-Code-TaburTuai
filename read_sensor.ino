@@ -36,8 +36,7 @@ void read_sensor() {
   //readWaterFlow();
   Serial.println("Temp : " + String(valTemp));
   Serial.println("Hum : " + String(valHum));
-  Serial.println("Moisture: " + String(valSoil) + "%");
-  Serial.println("read soil: "+String(readSoil));
+  Serial.println("Soil Moisture: " + String(valSoil) + "%");
   //Serial.print("Jarak (cm) : " + String(valCm));
 
   delay(500);
