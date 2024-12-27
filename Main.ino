@@ -1,4 +1,4 @@
-// branch biring ere
+// branch mamasa
 
 // Library Firebase ESP32
 #include <WiFi.h>
@@ -12,20 +12,20 @@
 
 // Pin Sensor
 #define SOILPIN 32 // ADC0
-//#define SOILPIN2 35
-//#define SOILPIN3 34
-//#define SOILPIN4 36
+#define SOILPIN2 35
+#define SOILPIN3 34
+#define SOILPIN4 36
 #define DHTPIN 15 //RX 3
 //#define POMPA2PIN 2 //D2 4
 #define POMPA1PIN 4 //D2 4
-#define LAMPU1PIN 5 //D4 2
+// #define LAMPU1PIN 5 //D4 2
 
 // pin water level
-//#define TRIG_WL 5
-//#define ECHO_WL 18
+#define TRIG_WL 5
+#define ECHO_WL 18
 
 // Pin sensor water flow
-//#define WATER_FLOW 17
+#define WATER_FLOW 17
 
 //#define DHTTYPE Sensor;
 #define DHTTYPE DHT11
@@ -50,39 +50,40 @@ String uid, path, pathPompaK1 , pathLampuK1, pathMonitoring;
 // init variabel value sensor
 //int bacaSensorPH = 0;   //membaca hasil dari sensor pH
 int valTemp, valHum;
-//int valCm;
+int valCm;
 int valSoil;
-//int valSoil2, valSoil3, valSoil4;
+int valSoil2, valSoil3, valSoil4;
 
 // init variabel status 0/1
-int statePompa1 , stateLampu1;
+int statePompa1;
+// int stateLampu1;
 
 // init variable water level
-//long currentMillis = 0;
-//long previousMillis = 0;
-//int interval = 1000;
-//float calibrationFactor = 4.5;
-//volatile byte pulseCount;
-//byte pulse1Sec = 0;
-//float flowRate;
-//unsigned int flowMilliLitres;
-//unsigned long totalMilliLitres;
+long currentMillis = 0;
+long previousMillis = 0;
+int interval = 1000;
+float calibrationFactor = 4.5;
+volatile byte pulseCount;
+byte pulse1Sec = 0;
+float flowRate;
+unsigned int flowMilliLitres;
+unsigned long totalMilliLitres;
 
-//void IRAM_ATTR pulseCounter()
-//{
-//  pulseCount++;
-//}
+void IRAM_ATTR pulseCounter()
+{
+ pulseCount++;
+}
 
 void initPin() {
   pinMode(POMPA1PIN, OUTPUT);
   pinMode(LAMPU1PIN, OUTPUT);
   pinMode(SOILPIN, INPUT);
-  //pinMode(SOILPIN2, INPUT);
-  //pinMode(SOILPIN3, INPUT);
-  //pinMode(SOILPIN4, INPUT);
-  //pinMode(TRIG_WL, OUTPUT);
-  //pinMode(ECHO_WL, INPUT);
-  //pinMode(WATER_FLOW, INPUT_PULLUP);
+  pinMode(SOILPIN2, INPUT);
+  pinMode(SOILPIN3, INPUT);
+  pinMode(SOILPIN4, INPUT);
+  pinMode(TRIG_WL, OUTPUT);
+  pinMode(ECHO_WL, INPUT);
+  pinMode(WATER_FLOW, INPUT_PULLUP);
 }
 
 void initWiFi() {
@@ -100,7 +101,7 @@ void initFirebase() {
   config.api_key = API_KEY;
     auth.user.email = "test@test.com";
     auth.user.password = "123456";
-    uid = "Za1HWAsqusRwQIIi3hqFeXOYFDs2"; 
+    uid = UID; 
 
   Firebase.reconnectWiFi(true);
   fbdo.setResponseSize(4096);
@@ -121,16 +122,16 @@ void setup() {
    initWiFi();
    Serial.println("Connection to Firebase");
    
-   //initFirebase();
-   //readFirebase();
+   initFirebase();
+   readFirebase();
    
-  //pulseCount = 0;
-  //flowRate = 0.0;
-  //flowMilliLitres = 0;
- //totalMilliLitres = 0;
-  //previousMillis = 0;
+  pulseCount = 0;
+  flowRate = 0.0;
+  flowMilliLitres = 0;
+ totalMilliLitres = 0;
+  previousMillis = 0;
 
-  //attachInterrupt(digitalPinToInterrupt(WATER_FLOW), pulseCounter, FALLING);
+  attachInterrupt(digitalPinToInterrupt(WATER_FLOW), pulseCounter, FALLING);
 }
 
 void readFirebase(){
